@@ -1,7 +1,5 @@
 import { Router } from "express";
 import db from "../utils/database.mjs";
-import { registerUsers, loginUser, deleteUser} from "../utils/middleware/login.mjs";
-import { authenticateToken} from "../utils/utilFunction.mjs";
 import { sendJsonResponse } from "../utils/utilFunction.mjs";
 
 const router = Router()
