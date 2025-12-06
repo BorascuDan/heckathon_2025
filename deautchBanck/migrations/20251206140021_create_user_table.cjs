@@ -5,6 +5,16 @@ exports.up = function (knex) {
         table.string('username', 50).notNullable();
         table.string('email', 100).notNullable().unique();
         table.string('password', 100).notNullable();
+        table.integer('age').notNullable();
+
+        table
+            .integer('personality_id')
+            .unsigned()
+            .references('id')
+            .inTable('personality')
+            .onDelete('SET NULL')
+            .nullable();
+
         table.timestamp('account_creation_date').defaultTo(knex.fn.now());
         table.timestamps(true, true);
     });
