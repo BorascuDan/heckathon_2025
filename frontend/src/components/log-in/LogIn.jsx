@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser, getUserPersonality } from "../../api";
 import "./LogIn.scss";
 
 function LogIn() {
@@ -7,9 +8,53 @@ function LogIn() {
     email: "",
     password: ""
   });
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleOnLogin = () => {
-    // TO DO: call the API to login, create session and redirect to home
+  const handleOnLogin = async () => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      // Login user
+      const loginResponse = await loginUser(formData);
+      
+      if (!loginResponse.success) {
+        setError(loginResponse.message || "Login failed");
+        setIsLoading(false);
+        return;
+      }
+
+      // Store user data in localStorage
+      const userData = loginResponse.data.user;
+      localStorage.setItem('user', JSON.stringify(userData));
+
+      // Check if user has personality set
+      try {
+        const personalityResponse = await getUserPersonality(userData.id);
+        
+        if (personalityResponse.success && personalityResponse.data) {
+          // User has personality, redirect to home
+          navigate('/home');
+        } else {
+          // User doesn't have personality, redirect to personality selection
+          navigate('/personality');
+        }
+      } catch (personalityError) {
+        // If personality check fails, assume no personality and redirect to personality selection
+        console.log('Personality check error:', personalityError);
+        navigate('/personality');
+      }
+    } catch (err) {
+      // Check if it's a 401 error (invalid credentials)
+      if (err.message.includes("Invalid credentials") || err.message.includes("401")) {
+        setError("Account doesn't exist. Please register first.");
+      } else {
+        setError(err.message || "An error occurred during login");
+      }
+      setIsLoading(false);
+    }
   }
 
   const handleChange = (e) => {
@@ -40,6 +85,15 @@ function LogIn() {
         <h1 className="login-title">LOG IN</h1>
         <p className="login-subtitle">Welcome back!</p>
 
+        {error && (
+          <div className="error-message">
+            {error}
+            {error.includes("doesn't exist") && (
+              <Link to="/register" className="error-link"> Go to Register</Link>
+            )}
+          </div>
+        )}
+
         <div className="input-grid">
           <div className="input-row">
             <input 
@@ -51,6 +105,7 @@ function LogIn() {
               onKeyPress={handleKeyPress}
               className="pixel-input"
               autoComplete="email"
+              disabled={isLoading}
             />
           </div>
 
@@ -64,6 +119,7 @@ function LogIn() {
               onKeyPress={handleKeyPress}
               className="pixel-input"
               autoComplete="current-password"
+              disabled={isLoading}
             />
           </div>
         </div>
@@ -71,9 +127,9 @@ function LogIn() {
         <button 
           className="login-btn"
           onClick={handleSubmit}
-          disabled={!isFormValid}
+          disabled={!isFormValid || isLoading}
         >
-          LOG IN
+          {isLoading ? 'LOGGING IN...' : 'LOG IN'}
         </button>
 
         <p className="register-prompt">

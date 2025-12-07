@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./AccountInfo.scss";
 
-function AccountInfo({ onNext }) {
+function AccountInfo({ onNext, isLoading = false, error = "" }) {
   const [formData, setFormData] = useState({
     age: "",
     name: "",
@@ -34,6 +34,21 @@ function AccountInfo({ onNext }) {
         <h1 className="step1-title">STEP 1</h1>
         <p className="step1-subtitle">Who are you?</p>
 
+        {error && (
+          <div className="error-message" style={{ 
+            fontFamily: 'inherit', 
+            fontSize: '14px', 
+            color: '#ff6b6b', 
+            background: 'rgba(255, 107, 107, 0.1)', 
+            border: '2px solid #ff6b6b', 
+            padding: '12px 16px', 
+            marginBottom: '24px', 
+            textAlign: 'center' 
+          }}>
+            {error}
+          </div>
+        )}
+
         <div className="input-grid">
           <div className="input-row split-row">
             <input 
@@ -44,6 +59,7 @@ function AccountInfo({ onNext }) {
               onChange={handleChange}
               className="pixel-input"
               autoComplete="off"
+              disabled={isLoading}
             />
             <input 
               type="text" 
@@ -53,6 +69,7 @@ function AccountInfo({ onNext }) {
               onChange={handleChange}
               className="pixel-input"
               autoComplete="off"
+              disabled={isLoading}
             />
           </div>
 
@@ -65,6 +82,7 @@ function AccountInfo({ onNext }) {
               onChange={handleChange}
               className="pixel-input"
               autoComplete="off"
+              disabled={isLoading}
             />
           </div>
 
@@ -77,6 +95,7 @@ function AccountInfo({ onNext }) {
               onChange={handleChange}
               className="pixel-input"
               autoComplete="off"
+              disabled={isLoading}
             />
           </div>
         </div>
@@ -84,9 +103,9 @@ function AccountInfo({ onNext }) {
         <button 
           className="next-btn"
           onClick={handleNext}
-          disabled={!isFormValid}
+          disabled={!isFormValid || isLoading}
         >
-          NEXT
+          {isLoading ? 'REGISTERING...' : 'NEXT'}
         </button>
 
         <p className="log-in-prompt">

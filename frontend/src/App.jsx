@@ -5,6 +5,7 @@ import WelcomePage from './components/welcome/WelcomePage'
 import Home from './components/home/Home'
 import Registration from './components/register/Registration';
 import LogIn from './components/log-in/LogIn';
+import Personalities from './components/register/Personalities';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<WelcomePage/>}/>
           <Route path="/register" element={<Registration/>}/>
           <Route path="/log-in" element={<LogIn/>}/>
+          <Route path="/personality" element={<Personalities/>}/>
           <Route path="/home" element={<Home/>}/>
         </Routes>
       </BrowserRouter>

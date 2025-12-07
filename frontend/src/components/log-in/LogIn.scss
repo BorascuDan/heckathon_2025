@@ -37,6 +37,29 @@
   letter-spacing: 1px;
 }
 
+.error-message {
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid #ff6b6b;
+  padding: $spacing-sm $spacing-md;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  
+  .error-link {
+    color: $color-primary-purple;
+    text-decoration: underline;
+    margin-left: 4px;
+    
+    &:hover {
+      color: $color-primary-purple-dark;
+      text-shadow: 0 0 8px rgba(217, 70, 239, 0.6);
+    }
+  }
+}
+
 .input-grid {
   display: flex;
   flex-direction: column;

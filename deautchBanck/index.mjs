@@ -3,12 +3,18 @@ import dotenv from 'dotenv'
 import apiRouter from './src/routes/apiRoute.mjs'
 import db from "./src/utils/database.mjs";
 import cron from 'node-cron';
+import cors from 'cors'
 import { warningForUsers } from './src/utils/utilFunction.mjs'
 
 const app = express();
 
 
 dotenv.config()
+app.use(cors({
+  origin: '*',
+  exposedHeaders: ['X-Auth-Token', 'X-Message', 'Content-Disposition', 'Authorization'], // Expose the custom header
+
+}));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

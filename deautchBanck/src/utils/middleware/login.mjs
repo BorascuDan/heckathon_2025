@@ -12,7 +12,7 @@ export const registerUsers = async (req, res) => {
                             .where({ email })
                             .select('*');
 
-        if (existingEmail.length) sendJsonResponse(res, false, 201, 'Email alredy in used', null)
+        if (existingEmail.length) return sendJsonResponse(res, false, 409, 'Email already in use', null)
         
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);

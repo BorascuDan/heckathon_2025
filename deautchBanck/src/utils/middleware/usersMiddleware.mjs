@@ -10,7 +10,7 @@ export const checkIfUserHasPersonality = async (req, res, next) => {
             .first('personality_id');
 
         if (id) {
-            const { personality } = await db('personality')
+            const { name: personality } = await db('personality')
                 .where({ id })
                 .first('name');
             

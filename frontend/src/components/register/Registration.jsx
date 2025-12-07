@@ -1,43 +1,49 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../api";
 import AccountInfo from "./AccountInfo";
-import Personalities from "./Personalities";
 
 function Registration() {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    age: "",
-    name: "",
-    email: "",
-    password: "",
-    personality: ""
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleOnComplete = () => {
-    // TO DO: make an API call and create a new account with the data
-  }
+  const handleAccountInfoNext = async (accountData) => {
+    setIsLoading(true);
+    setError("");
 
-  const handleAccountInfoNext = (accountData) => {
-    setFormData(prev => ({
-      ...prev,
-      ...accountData
-    }));
-    setStep(2);
-  };
+    try {
+      // Register the user
+      const response = await registerUser({
+        username: accountData.name,
+        email: accountData.email,
+        password: accountData.password,
+        age: parseInt(accountData.age, 10)
+      });
 
-  const handlePersonalityNext = (personality) => {
-    const completeData = {
-      ...formData,
-      personality: personality
-    };
-    setFormData(completeData);
-    handleOnComplete();
+      if (response.success) {
+        // Store user data in localStorage
+        localStorage.setItem('user', JSON.stringify(response.data));
+        
+        // Redirect to personality selection page
+        navigate('/personality');
+      } else {
+        setError(response.message || "Registration failed");
+      }
+    } catch (err) {
+      console.error('Registration error:', err);
+      setError(err.message || "An error occurred during registration");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <>
-      {step === 1 && <AccountInfo onNext={handleAccountInfoNext} />}
-      {step === 2 && <Personalities onNext={handlePersonalityNext} />}
-    </>
+    <AccountInfo 
+      onNext={handleAccountInfoNext} 
+      isLoading={isLoading}
+      error={error}
+    />
   );
 }
 
