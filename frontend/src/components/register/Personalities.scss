@@ -1,0 +1,121 @@
+@use "../../index.scss" as *;
+
+.step2-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, $color-bg-dark 0%, #1e293b 50%, #581c87 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.step2-content {
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.step2-title {
+  font-family: $font-primary;
+  font-size: 48px;
+  color: $color-text-primary;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.step2-subtitle {
+  font-family: $font-primary;
+  font-size: $font-size-lg;
+  color: $color-text-primary;
+  margin: 0 0 48px 0;
+  letter-spacing: 1px;
+}
+
+.personality-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.personality-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-md;
+}
+
+.personality-btn {
+  background: transparent;
+  border: 3px solid $color-border-teal;
+  box-shadow: 0px 0px 5px 2.5px transparent;
+  color: $color-text-primary;
+  font-family: $font-primary;
+  font-size: $font-size-md;
+  padding: $spacing-md $spacing-sm;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+  &.selected {
+    box-shadow: 0 0 5px 2.5px $color-border-teal;    
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+.personality-grid:has(.selected) .personality-btn:not(.selected) {
+  opacity: 0.6;
+}
+
+
+.step2-hint {
+  font-family: $font-primary;
+  font-size: 10px;
+  color: $color-text-secondary;
+  margin: 0 0 32px 0;
+  letter-spacing: 1px;
+}
+
+.get-pet-btn {
+  background: $color-primary-purple-dark;
+  border: 3px solid $color-primary-purple;
+  color: $color-text-primary;
+  font-family: $font-primary;
+  font-size: $font-size-md;
+  padding: $spacing-md $spacing-xl;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: 100%;
+  max-width: 300px;
+  
+  &:enabled {
+    box-shadow: 0 0 5px 2.5px $color-primary-purple;  
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Responsive
+@media (max-width: 640px) {
+  .step2-title { font-size: $font-size-xl; }
+  .step2-subtitle { font-size: $font-size-md; margin-bottom: $spacing-lg}
+
+  .personality-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm;
+  }
+  
+  .personality-btn {
+    font-size: $font-size-base;
+    padding: $spacing-md $spacing-sm;
+  }
+}

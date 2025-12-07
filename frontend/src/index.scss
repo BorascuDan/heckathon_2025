@@ -1,0 +1,180 @@
+// ============================================
+// DESIGN SYSTEM - COLORS & TYPOGRAPHY
+// ============================================
+
+// --------------------------------------------
+// COLOR PALETTE
+// --------------------------------------------
+
+// Primary Colors
+$color-primary-purple: #d946ef;        // Bright magenta/purple (buttons, accents)
+$color-primary-purple-dark: #a855f7;   // Darker purple variant
+$color-primary-pink: #ec4899;          // Pink accent
+
+// Background Colors
+$color-bg-dark: #0f172a;               // Dark navy background
+$color-bg-darker: #020617;             // Darker navy
+$color-bg-blue-dark: #1e293b;          // Dark blue background
+$color-bg-teal: #134e4a;               // Teal/cyan dark background
+$color-bg-gradient-start: #1e293b;     // Gradient start
+$color-bg-gradient-end: #581c87;       // Gradient end (purple)
+
+// UI Element Colors
+$color-border-purple: #d946ef;         // Purple borders
+$color-border-teal: #14b8a6;           // Teal borders
+$color-text-primary: #ffffff;          // White text
+$color-text-secondary: #94a3b8;        // Gray/slate text
+$color-text-muted: #64748b;            // Muted text
+
+// Icon Colors
+$color-icon-orange: #fb923c;           // Orange (food bowl)
+$color-icon-yellow: #fbbf24;           // Yellow (drink)
+$color-icon-pink: #ec4899;             // Pink (heart/sleep)
+$color-icon-blue: #3b82f6;             // Blue (play/wash)
+$color-icon-cyan: #06b6d4;             // Cyan accent
+
+// Status/Alert Colors
+$color-success: #10b981;               // Success green
+$color-warning: #f59e0b;               // Warning orange
+$color-error: #ef4444;                 // Error red
+$color-info: #3b82f6;                  // Info blue
+
+// Overlay/Modal
+$color-overlay: rgba(0, 0, 0, 0.7);    // Dark overlay
+$color-modal-bg: #7c3aed;              // Purple modal background
+
+// --------------------------------------------
+// TYPOGRAPHY
+// --------------------------------------------
+
+// Font Families (Pixel/Retro Style)
+$font-primary: 'Press Start 2P', 'Courier New', monospace;  // Main pixel font
+$font-secondary: 'VT323', 'Consolas', monospace;             // Alternative retro font
+$font-body: 'Courier New', 'Courier', monospace;             // Body text fallback
+
+// Font Sizes
+$font-size-xs: 8px;                    // Extra small pixel text
+$font-size-sm: 10px;                   // Small pixel text
+$font-size-base: 12px;                 // Base pixel text
+$font-size-md: 14px;                   // Medium text
+$font-size-lg: 16px;                   // Large text
+$font-size-xl: 24px;                   // Extra large (headings)
+$font-size-2xl: 32px;                  // 2X large (titles)
+$font-size-3xl: 48px;                  // 3X large (main titles)
+
+// Font Weights
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+// Line Heights
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Letter Spacing (for pixel fonts)
+$letter-spacing-tight: -0.5px;
+$letter-spacing-normal: 0px;
+$letter-spacing-wide: 1px;
+$letter-spacing-wider: 2px;
+
+// --------------------------------------------
+// SPACING SYSTEM
+// --------------------------------------------
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+
+// --------------------------------------------
+// BORDER RADIUS
+// --------------------------------------------
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-full: 9999px;
+
+// --------------------------------------------
+// SHADOWS
+// --------------------------------------------
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+$shadow-glow-purple: 0 0 20px rgba(217, 70, 239, 0.5);
+$shadow-glow-cyan: 0 0 20px rgba(6, 182, 212, 0.5);
+
+// --------------------------------------------
+// MIXINS FOR COMMON PATTERNS
+// --------------------------------------------
+
+// Pixel text styling
+@mixin pixel-text {
+  font-family: $font-primary;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-normal;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Button styling
+@mixin button-primary {
+  background: $color-primary-purple;
+  border: 3px solid $color-border-purple;
+  color: $color-text-primary;
+  padding: $spacing-md $spacing-xl;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    box-shadow: $shadow-glow-purple;
+    transform: translateY(-2px);
+  }
+}
+
+// Modal/Card styling
+@mixin card-modal {
+  background: $color-modal-bg;
+  border: 3px solid $color-border-purple;
+  border-radius: $border-radius-md;
+  padding: $spacing-xl;
+  box-shadow: $shadow-lg;
+}
+
+// Input field styling
+@mixin input-field {
+  background: transparent;
+  border: 2px solid $color-border-teal;
+  border-radius: $border-radius-sm;
+  color: $color-text-primary;
+  padding: $spacing-md;
+  font-family: $font-body;
+  font-size: $font-size-base;
+  
+  &::placeholder {
+    color: $color-text-muted;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary-purple;
+    box-shadow: $shadow-glow-purple;
+  }
+}
+
+// --------------------------------------------
+// GOOGLE FONTS IMPORT (Add to your HTML)
+// --------------------------------------------
+// @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+body {
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  background: #0f172a;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
