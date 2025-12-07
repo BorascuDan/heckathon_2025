@@ -1,0 +1,213 @@
+@use "../../index.scss" as *;
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+// TOT POPUP-UL: font mai subtire, fara pixel smoothing
+.popup-container {
+  background-color: #2e1065;
+  border: 3px solid #d946ef;
+  width: 100%;
+  max-width: 420px;
+  color: #fff;
+
+  // folosim font SECONDAR (VT323) ca sa fie mai subtire
+  font-family: $font-secondary; // 'VT323', 'Consolas', monospace
+
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  image-rendering: auto;
+
+  position: relative;
+  box-shadow: 0 0 25px rgba(217, 70, 239, 0.25);
+  animation: popIn 0.2s ease-out;
+  will-change: transform, opacity;
+}
+
+/* fortam acelasi stil subtire si pe toate elementele din popup */
+.popup-container * {
+  font-family: $font-secondary !important;
+  font-weight: 400 !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-shadow: none !important;
+  image-rendering: auto !important;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(217, 70, 239, 0.3);
+
+  .header-title {
+    font-size: 36px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 1px;
+    color: #e9d5ff;
+
+    .heart-icon {
+      color: #d946ef;
+      font-size: 18px;
+    }
+  }
+
+  .close-icon-btn {
+    background: #db2777;
+    border: 1px solid #fbcfe8;
+    color: white;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+      background: #be185d;
+    }
+  }
+}
+
+.popup-body {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main-message {
+  font-size: 18px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: #e9d5ff;
+  margin: 0;
+  letter-spacing: 0.4px;
+  font-weight: 400;
+}
+
+.resource-box {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  border: 2px solid;
+
+  &.teal-theme {
+    border-color: #0891b2;
+    .resource-header { color: #22d3ee; }
+  }
+
+  &.purple-theme {
+    border-color: #7c3aed;
+    .resource-header { color: #a78bfa; }
+  }
+
+  .resource-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 19px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    .icon { font-size: 16px; }
+  }
+
+  .highlight-number {
+    font-size: 45px;
+    color: #fff;
+    margin-bottom: 4px;
+    font-weight: 400;
+  }
+
+  .subtext {
+    font-size: 10px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 8px;
+      &:last-child { margin-bottom: 0; }
+
+      a {
+        color: #e9d5ff;
+        text-decoration: underline;
+        font-size: 15px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: color 0.2s;
+
+        &:hover {
+          color: #d946ef;
+        }
+      }
+    }
+  }
+}
+
+.popup-footer {
+  padding: 0 20px 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  .close-main-btn {
+    width: 100%;
+    max-width: 200px;
+    background: #6b21a8;
+    border: 3px solid #a855f7;
+    color: white;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+
+    &:hover {
+      background: #581c87;
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}

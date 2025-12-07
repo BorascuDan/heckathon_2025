@@ -1,0 +1,135 @@
+@use "../../index.scss" as *;
+
+// Folosim aceleași variabile ca la Step 2, dar adaptăm culorile bordurilor
+// conform imaginii Step 1 (care pare să folosească mov/purple pentru inputs, nu teal).
+
+.step1-container {
+  min-height: 100vh;
+  // Același gradient ca la Step 2 pentru consistență
+  background: linear-gradient(180deg, $color-bg-dark 0%, #1e293b 50%, #581c87 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.step1-content {
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.step1-title {
+  font-family: $font-primary;
+  font-size: 48px;
+  color: $color-text-primary;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.step1-subtitle {
+  font-family: $font-primary;
+  font-size: $font-size-lg;
+  color: $color-text-primary;
+  margin: 0 0 48px 0;
+  letter-spacing: 1px;
+}
+
+.input-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; // Spațiere între rânduri
+  margin-bottom: 64px; // Spațiu până la butonul NEXT
+}
+
+.input-row {
+  display: flex;
+  width: 100%;
+  
+  &.split-row {
+    gap: 24px; // Spațiu între Age și Name
+    
+    // Putem ajusta proporțiile aici. 
+    // Dacă vrei Age mai mic și Name mai mare, poți folosi flex-grow diferit.
+    input:first-child { flex: 1; } // Age puțin mai mic
+    input:last-child { flex: 1; }  // Name mai mare
+  }
+}
+
+.pixel-input {
+  width: 100%;
+  background: transparent;
+  // În imaginea 1, bordurile sunt mov (ca butonul), nu teal
+  border: 3px solid $color-primary-purple; 
+  color: $color-text-primary;
+  font-family: $font-primary;
+  font-size: $font-size-md;
+  padding: $spacing-md $spacing-sm;
+  text-align: center; // Placeholder centrat conform imaginii
+  outline: none;
+  transition: all 0.2s ease;
+  text-transform: uppercase; // Textul pare uppercase în stilul pixel
+  letter-spacing: 1px;
+
+  &::placeholder {
+    color: rgba($color-text-primary, 0.5);
+    text-transform: none; // Sau uppercase dacă preferi placeholder-ul mare
+  }
+
+  &:focus {
+    box-shadow: 0 0 10px rgba($color-primary-purple, 0.5);
+    background: rgba($color-primary-purple, 0.1);
+  }
+}
+
+.next-btn {
+  background: $color-primary-purple-dark; // Buton închis la culoare
+  border: 3px solid $color-primary-purple; // Bordură mov deschis
+  color: $color-text-primary;
+  font-family: $font-primary;
+  font-size: $font-size-md;
+  padding: $spacing-md $spacing-xl;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: auto;
+  min-width: 200px;
+  
+  &:enabled {
+    box-shadow: 0 0 5px 2.5px $color-primary-purple;  
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #4b5563; // Gri pentru disabled
+  }
+  
+  &:hover:enabled {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px 5px rgba($color-primary-purple, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 640px) {
+  .step1-title { font-size: $font-size-xl; }
+  .step1-subtitle { font-size: $font-size-md; margin-bottom: $spacing-lg}
+
+  .input-row.split-row {
+    flex-direction: row; // Păstrăm pe rând pe mobil sau schimbăm în column dacă e prea înghesuit
+    gap: $spacing-sm;
+  }
+  
+  .pixel-input {
+    font-size: $font-size-base;
+    padding: $spacing-md $spacing-sm;
+  }
+}
