@@ -19,12 +19,21 @@ router.post("/", async (req, res) => {
         
         const newChat = [...formatedMessage, ...botMessage]
 
-        await db('chat')
-            .where({user_id})
-            .update({
-                messages: JSON.stringify(newChat),
-                key
-            })
+        if (chat) {
+            await db('chat')
+                .where({user_id})
+                .update({
+                    messages: JSON.stringify(newChat),
+                    key
+                })
+        } else {
+            await db('chat')
+                .insert({
+                    user_id,
+                    messages: JSON.stringify(newChat),
+                    key
+                })
+        }
 
         return sendJsonResponse(res, true, 200, "succes", response);
     } catch (error) {
