@@ -78,7 +78,11 @@ export const warningForUsers = async () => {
         body: JSON.stringify({ messages })
       });
       const data = await response.json();
-      console.log({data})
+
+      if (data.diseases === null) {
+        continue;
+      } 
+
       for (let disease of data.diseases) {
         if (warnings.has(disease)) {
           const user_warnings = {

@@ -17,7 +17,7 @@ class Chatbot():
             agent_name=self.agent_name,
             definition=PromptAgentDefinition(
                 model="o4-mini",
-                instructions="You are a storytelling agent. You craft engaging one-line stories based on user prompts and context.",
+                instructions="You are my virtual friend. Talk to me in short, natural, supportive messages (1–2 sentences), like a real friend who listens first and responds calmly.",
             ),
         )
 

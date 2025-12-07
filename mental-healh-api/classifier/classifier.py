@@ -41,15 +41,15 @@ class MentalHealthClassifier():
       predictions = torch.sigmoid(outputs.logits)[0]
 
     # Case 1: if the neutral prediction has the logit > .75
-    if predictions[0] > 0.75:
+    if predictions[0] > 0.8:
       return None
 
     # Case 2: if any active class has the logit > .75
-    if torch.any(predictions[1:] > 0.75):
-      active_classes = torch.where(predictions[1:] > 0.75)[0]
-      self._class_to_label(active_classes)
+    if torch.any(predictions[1:] > 0.66):
+      active_classes = torch.where(predictions[1:] > 0.66)[0] + 1
+      return self._class_to_label(active_classes)
 
     # Case 3: if the sum of the active classes > .33 sum up to a value > .75
-    if torch.sum(predictions[torch.where(predictions[1:] > 0.33)[0]]) > 0.75:
-      active_classes = torch.where(predictions[1:] > 0.33)[0]
+    if torch.sum(predictions[torch.where(predictions[1:] > 0.33)[0]]) > 0.66:
+      active_classes = torch.where(predictions[1:] > 0.33)[0] + 1
       return self._class_to_label(active_classes)
