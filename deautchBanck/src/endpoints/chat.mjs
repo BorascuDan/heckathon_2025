@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
                     [];
         
         const newChat = [...formatedMessage, ...botMessage]
+
         await db('chat')
             .where({user_id})
             .update({

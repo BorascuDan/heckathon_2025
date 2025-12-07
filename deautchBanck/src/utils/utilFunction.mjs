@@ -37,7 +37,6 @@ export const getAiResponse = async (message, key = null) => {
          })
       });
       const data = await response.json();
-
       const chat = [
         { type: 'user', content: message },
         { type: 'bot', content: data.message }

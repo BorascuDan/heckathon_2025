@@ -80,7 +80,7 @@ def talk(request: HumanMessage):
     # inference from the OpenAI API
     try:
         response = chatbot.talk(request.message)
-        return {"message": response}
+        return response
     except Exception as e:
         logger.error(f"Failed to retrieve message from OpenAI API.")
         raise HTTPException(status_code=500, detail=f"Internal error: {str(e)}")

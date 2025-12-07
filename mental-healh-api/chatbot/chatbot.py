@@ -30,4 +30,4 @@ class Chatbot():
             extra_body={"agent": {"name": self.agent_name, "type": "agent_reference"}},
         )
 
-        return response.output_text
+        return {"id": response.id, "message": response.output_text}
