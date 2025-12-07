@@ -35,11 +35,11 @@ router.get("/",  async (req, res) => {
     const {user_id} = req.query;
 
     try {
-        const { messages } = await db('chat')
+        const chat = await db('chat')
             .where({user_id})
             .first();
 
-        const formatedMessage = JSON.parse(messages)
+        const formatedMessage = chat ? JSON.parse(chat.messages) : [];
         return sendJsonResponse(res, true, 200, "usuer chat fetched", formatedMessage)
     } catch (error) {
         console.error(error);

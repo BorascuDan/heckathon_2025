@@ -127,11 +127,12 @@
 
 .message {
   display: flex;
+  width: 100%;
   animation: slideIn 0.3s ease-out;
 }
 
 .message-bot {
-  align-self: flex-start;
+  justify-content: flex-start;
   
   .message-content {
     background: $color-bg-teal;
@@ -145,7 +146,7 @@
 }
 
 .message-user {
-  align-self: flex-end;
+  justify-content: flex-end;
   
   .message-content {
     background: rgba(139, 92, 246, 0.3);
@@ -164,6 +165,15 @@
     line-height: 1.6;
     word-wrap: break-word;
   }
+}
+
+.loading-messages {
+  text-align: center;
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  padding: $spacing-lg;
+  animation: pulse 1.5s infinite;
 }
 
 @keyframes slideIn {

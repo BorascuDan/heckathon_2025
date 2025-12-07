@@ -1,6 +1,6 @@
 import './Navbar.scss';
 
-const Navbar = ({ petName = "ESTJ CAT" }) => {
+const Navbar = ({ petName = "CAT" }) => {
   return (
     <nav className="navigation-bar">
       <div className="nav-content">
@@ -9,7 +9,7 @@ const Navbar = ({ petName = "ESTJ CAT" }) => {
             <span className="pet-icon">🐾</span>
         </div>
         <div className="pet-name">
-          ETSJ CAT
+          {petName}
         </div>
       </div>
     </nav>
