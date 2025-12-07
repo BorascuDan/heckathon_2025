@@ -1,0 +1,55 @@
+@use "../../index.scss" as *;
+
+.navigation-bar {
+  background: $color-bg-dark;
+  backdrop-filter: blur(10px);
+  padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pet-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pet-icon {
+  font-size: 24px;
+}
+
+.pet-name {
+  font-family: $font-primary;
+  font-size: 16px;
+  color: $color-text-primary;
+  margin: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.rename-btn {
+  background: transparent;
+  border: none;
+  color: $color-text-primary;
+  font-family: $font-primary;
+  font-size: $font-size-md;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;  
+}
+
+@media (max-width: 640px) {
+  .pet-name, .rename-btn {
+    font-size: $font-size-base;
+  }
+}
