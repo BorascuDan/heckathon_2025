@@ -24,7 +24,7 @@ export const authenticateToken = (req, res, next) => {
   });
 };
 
-export const getAiResponse = async (message) => {
+export const getAiResponse = async (message, key = null) => {
   try {
     const response = await fetch('http://localhost:8000/talk', {
         method: 'POST',
@@ -32,7 +32,8 @@ export const getAiResponse = async (message) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ 
-          "message": message
+          "message": message,
+          ...(key ? { "id": key } : {})
          })
       });
       const data = await response.json();
@@ -41,7 +42,7 @@ export const getAiResponse = async (message) => {
         { type: 'user', content: message },
         { type: 'bot', content: data.message }
       ]
-      return chat
+      return [data.id, chat]
   } catch (error) {
     console.error(error);
     return

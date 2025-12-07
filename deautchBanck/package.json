@@ -7,6 +7,9 @@
   "scripts": {
     "start": "node server.mjs",
     "dev": "nodemon server.mjs",
+    "migrate": "npx knex migrate:latest --knexfile knexfile.cjs",
+    "migrate:rollback": "npx knex migrate:rollback --knexfile knexfile.cjs",
+    "migrate:make": "npx knex migrate:make --knexfile knexfile.cjs",
     "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage --forceExit",
     "test_windows": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage --forceExit"
   },

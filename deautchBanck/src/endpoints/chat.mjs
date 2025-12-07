@@ -7,11 +7,11 @@ const router = Router()
 router.post("/", async (req, res) => {
     const { user_id, message } = req.body
     try {
-        const botMessage = await getAiResponse(message)
-        const response = botMessage[1].content
         const chat = await db('chat')
             .where({user_id})
             .first();
+        const [ key, botMessage ] = await getAiResponse(message, chat?.key ?? null)
+        const response = botMessage[1].content
             
         const formatedMessage = chat ? 
                     JSON.parse(chat.messages) :
@@ -21,7 +21,8 @@ router.post("/", async (req, res) => {
         await db('chat')
             .where({user_id})
             .update({
-                messages: JSON.stringify(newChat)
+                messages: JSON.stringify(newChat),
+                key
             })
 
         return sendJsonResponse(res, true, 200, "succes", response);
